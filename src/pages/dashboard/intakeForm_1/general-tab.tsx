@@ -1,10 +1,11 @@
 import { faker } from '@faker-js/faker';
-import { App, Col, Row, Select, Form } from 'antd';
+import { App, Col, Row, Select, Form, Input } from 'antd';
 import React from 'react';
 
 import Card from '@/components/card';
 import { useUserInfo } from '@/store/userStore';
 
+const { TextArea } = Input;
 type FieldType = {
   name?: string;
   email?: string;
@@ -143,6 +144,10 @@ export default function GeneralTab() {
     address: string;
   }
 
+  const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    console.log('Change:', e.target.value);
+  };
+
   return (
     <Card>
       <Form layout="vertical">
@@ -152,6 +157,13 @@ export default function GeneralTab() {
               <SelectSizesDemo key={index} {...question} />
             </Col>
           ))}
+        </Row>
+        <Row>
+          <Col span={24} lg={24}>
+            <Form.Item label="TextArea">
+              <TextArea showCount maxLength={100} onChange={onChange} placeholder="Type here" />
+            </Form.Item>
+          </Col>
         </Row>
       </Form>
     </Card>
